@@ -165,4 +165,10 @@ implements AuthenticationServiceProviderInterface,AuthorizationServiceProviderIn
 
         return $authenticationService;
     }
+    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
+{
+    $resolver = new OrmResolver();
+
+    return new AuthorizationService($resolver);
+}
 }
