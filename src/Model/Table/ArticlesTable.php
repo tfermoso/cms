@@ -19,7 +19,6 @@ class ArticlesTable extends Table
     {
         parent::initialize($config);
         $this->addBehavior('Timestamp');
-        // Change this line
         $this->belongsToMany('Tags', [
             'joinTable' => 'articles_tags',
             'dependent' => true

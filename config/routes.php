@@ -81,6 +81,7 @@ return function (RouteBuilder $routes): void {
         // passed parameters.
         $builder->scope('/articles', function (RouteBuilder $builder) {
             $builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+
         });
 
         $builder->fallbacks();
