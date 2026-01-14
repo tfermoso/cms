@@ -29,6 +29,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'fonts', 'cake']) ?>
+    <?= $this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -60,10 +61,28 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </button>
 
             <aside class="side-nav" id="sidebar">
-                <h4 class="heading"><?= __('Navigation') ?></h4>
-                <?= $this->Html->link(__('My Articles'), ['controller' => 'Articles', 'action' => 'index']) ?>
-                <?= $this->Html->link(__('New Article'), ['controller' => 'Articles', 'action' => 'add']) ?>
+
+                <nav class="side-menu">
+                    <?= $this->Html->link(
+                        '<i class="fa-solid fa-newspaper"></i><span>Articles</span>',
+                        ['controller' => 'Articles', 'action' => 'index'],
+                        ['escape' => false, 'class' => 'side-link']
+                    ) ?>
+
+                    <?= $this->Html->link(
+                        '<i class="fa-solid fa-user"></i><span>Users</span>',
+                        ['controller' => 'Users', 'action' => 'index'],
+                        ['escape' => false, 'class' => 'side-link']
+                    ) ?>
+
+                    <?= $this->Html->link(
+                        '<i class="fa-solid fa-tags"></i><span>Tags</span>',
+                        ['controller' => 'Tags', 'action' => 'index'],
+                        ['escape' => false, 'class' => 'side-link']
+                    ) ?>
+                </nav>
             </aside>
+
         <?php endif; ?>
 
         <div class="container">
@@ -74,19 +93,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <footer>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggle = document.querySelector('.sidebar-toggle');
-            const sidebar = document.getElementById('sidebar');
 
-            if (toggle && sidebar) {
-                toggle.addEventListener('click', function () {
-                    sidebar.classList.toggle('open');
-                });
-            }
-        });
-    </script>
-
+    <?= $this->Html->script('sidebar') ?>
 </body>
 
 </html>

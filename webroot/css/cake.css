@@ -278,6 +278,16 @@ input[type='color'] {
     display: flex;
     min-height: calc(100vh - 60px);
 }
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.side-menu a{
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
 
 /* Sidebar */
 .side-nav {
