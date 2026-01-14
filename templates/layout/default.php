@@ -18,6 +18,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,6 +34,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
+
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
@@ -52,6 +54,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
     </nav>
     <main class="main">
+        <!-- añadir sidebar si el usuario está logeado -->
+        <?php if ($this->request->getAttribute('identity')): ?>
+            <aside class="side-nav">
+                <h4 class="heading"><?= __('Navigation') ?></h4>
+                <?= $this->Html->link(__('My Articles'), ['controller' => 'Articles', 'action' => 'index']) ?>
+                <?= $this->Html->link(__('New Article'), ['controller' => 'Articles', 'action' => 'add']) ?>
+            </aside>
+        <?php endif; ?>
+
+
         <div class="container">
             <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
@@ -60,4 +72,5 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <footer>
     </footer>
 </body>
+
 </html>
