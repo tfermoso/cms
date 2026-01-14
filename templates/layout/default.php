@@ -41,7 +41,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div class="top-nav-links">
             <!-- Si estoy logeado email y enlace a logout, sino nada -->
             <?php if ($this->request->getAttribute('identity')): ?>
-                <span><?= $this->request->getAttribute('identity')->email ?></span>
+                <span><?= $this->request->getAttribute('identity')->username ?></span>
                 <?= $this->Html->link(
                     'Logout',
                     ['controller' => 'Users', 'action' => 'logout'],
