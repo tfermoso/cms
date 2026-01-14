@@ -21,25 +21,30 @@
             </thead>
             <tbody>
                 <?php foreach ($users as $user): ?>
-                <tr>
-                    <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= h($user->email) ?></td>
-                    <td><?= h($user->username) ?></td>
-                    <td><?= h($user->created) ?></td>
-                    <td><?= h($user->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                        <?= $this->Form->postLink(
-                            __('Delete'),
-                            ['action' => 'delete', $user->id],
-                            [
-                                'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $user->id),
-                            ]
-                        ) ?>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= $this->Number->format($user->id) ?></td>
+                        <td><?= h($user->email) ?></td>
+                        <td><?= h($user->username) ?></td>
+                        <td><?= h($user->created) ?></td>
+                        <td><?= h($user->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+                            <!--Solo mostrar si el usuario esta autorizado-->
+                            <?php if ($this->request->getAttribute('identity')->can('edit', $user)): ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                            <?php endif; ?>
+                            <?php if ($this->request->getAttribute('identity')->can('delete', $user)): ?>
+                                <?= $this->Form->postLink(
+                                    __('Delete'),
+                                    ['action' => 'delete', $user->id],
+                                    [
+                                        'method' => 'delete',
+                                        'confirm' => __('Are you sure you want to delete # {0}?', $user->id),
+                                    ]
+                                ) ?>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -52,6 +57,7 @@
             <?= $this->Paginator->next(__('next') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?>
+        </p>
     </div>
 </div>

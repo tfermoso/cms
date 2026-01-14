@@ -98,10 +98,11 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->Authorization->skipAuthorization();
 
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        // autorización basada en Policy
+        $this->Authorization->authorize($user);
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {

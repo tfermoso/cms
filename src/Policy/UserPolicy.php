@@ -13,4 +13,9 @@ class UserPolicy
         // Solo puede editarse a sí mismo
         return $identity->getIdentifier() === $user->id;
     }
+    public function canDelete(IdentityInterface $identity, User $user): bool
+    {
+        // Solo puede eliminarse a sí mismo
+        return $identity->getIdentifier() === $user->id;
+    }
 }
