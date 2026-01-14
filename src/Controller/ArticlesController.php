@@ -122,7 +122,7 @@ class ArticlesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
 
         $article = $this->Articles->findBySlug($slug)->firstOrFail();
-        $this->Authorization->authorization($article);
+        $this->Authorization->authorize($article);
 
         if ($this->Articles->delete($article)) {
             $this->Flash->success(__('The {0} article has been deleted.', $article->title));
@@ -132,6 +132,8 @@ class ArticlesController extends AppController
     }
     public function tags(...$tags)
     {
+        $this->Authorization->skipAuthorization();
+
         // Use the ArticlesTable to find tagged articles.
         $articles = $this->Articles->find('tagged', tags: $tags)
             ->all();
